@@ -18,7 +18,7 @@ app.set('superSecret', config.secret);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(morgan)('dev'));
+//app.use(morgan)('dev');
 
 //const upload = multer({storage: storage}).single("profilePicture")
 

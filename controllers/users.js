@@ -61,11 +61,11 @@ const update = (req, res) => {
 function authenticate(req, res) {
 	User.findOne({
 		username: req.body.username
-	}
+	},
 		function(err, user) {
 			if (err) throw err;
 			if(!user) {
-				res.json{success: false, message: 'Oops, you may have entered the wrong username, please go back and try again.'});
+				res.json({success: false, message: 'Oops, you may have entered the wrong username, please go back and try again.'});
 			}else if (user) {
 
 				if(user.password != req.body.password) {

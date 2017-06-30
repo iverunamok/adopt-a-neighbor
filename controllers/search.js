@@ -1,6 +1,6 @@
 
 const request = require('superagent');
-const User = require('../models/user');
+const User = require('../models/users');
 const GeoJSON = require('geojson');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -32,7 +32,7 @@ function receive (req, res){
 				function(err,result) {
 					console.log(err, result)
 					const newRes = result.filter(function(el) {
-						return el.username !=== req.user.username;
+						return el.username !== req.user.username;
 					})
 					res.json(newRes)
 				}
