@@ -1,4 +1,4 @@
-//the index.js is the brain, 
+//the index.js is the brain of the backend, 
 //has all the routes in it
 const express = require('express');
 const morgan = require('morgan');

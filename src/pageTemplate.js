@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-//or const React, { Component } = require('react');
+
+const React, { Component } = require('react');
+//or import React, {Component} from 'react';
+
 
 export default class <<Classname>> extends Component {
 	
