@@ -1,33 +1,27 @@
 const User = require('../models/users');
 const request = require('superagent');
-//const config = require('../config');
+const config = require('../config');
 const jwt = require('jsonwebtoken');
 
 
 function create (req, res){
 	console.log('body', req.body);
-	const zip = req.body.zip_code;
+	const addy = req.body.address;
+	const addyPlus = addy.replace(/ /g, "+");
 	const first = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 	const last = "&AIzaSyDZImnAo3t9Ye0cjExfCq_0mc38ngMS7lM";
-	const geoURL = first.concat(zip).concat(last);
+	const geoURL = first.concat(addyPlus).concat(last);
 	request
 		.get(geoURL)
 		.end(function(err, geoRes){
 			const location = JSON.parse(geoRes.text).results[0].geometry.location;
 			const user = new User ({
 				//imgURL: (req.file ? req.file.path.split('public')[1] : ""),
-				//help_neighbor: req.body.help_neighbor,
+				
 				username: req.body.username,
 				password: req.body.password,
-				zip_code: req.body.zip_code,
-				//yard_work: req.body.yard_work,
-				//indoor_cleaning: req.body.indoor_cleaning,
-				//filing_paperwork: req.body.filing_paperwork,
-				//heavy_lifting: req.body.heavy_lifting,
-				//transportation: req.body.transportation,
-				//visiting: req.body.visiting,
-				//errands: req.body.errands,
-				//other: req.body.other,
+				address: req.body.address,
+				//helper: req.body.helper,
 				lat: location.lat,
 				lng: location.lng,
 				location: {
@@ -41,8 +35,8 @@ function create (req, res){
 
 				} else {
 					res.json(result)
-					//const token = jwt.sign(user, config.secret);
-					//res.send({token: token, result});
+					const token = jwt.sign(user, config.secret);
+					res.send({token: token, result});
 				}
 			})	
 	})

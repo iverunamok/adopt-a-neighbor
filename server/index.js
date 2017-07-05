@@ -12,7 +12,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/adoptaneighbor');
 app.set('superSecret', config.secret);
 
