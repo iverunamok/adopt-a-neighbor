@@ -52,8 +52,8 @@ export default class App extends Component {
             {this.state.token ? <Link to='/' onClick={this.logout.bind(this)}> Logout </Link> : ""}
 
           </div>
-          <Route exact path="/" component={(props) => <Splash {...props} token={this.state.token}/>}/>
-          <Route path="/Login" component={(props) => <Login {...props} login={this.login.bind(this)}/>}/>
+          <Route exact path="/" component={() => <Splash  token={this.state.token}/>}/>
+          <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>
           <Route path="/Home" component={() => <Home token={this.state.token}/>}/>
           <Route path="/Messages" component={() => <Messages token={this.state.token}/>}/>
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token}/>}/>
