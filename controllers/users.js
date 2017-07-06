@@ -55,29 +55,24 @@ const update = (req, res) => {
 function authenticate(req, res) {
 	User.findOne({
 		username: req.body.username
-	},
-		function(err, user) {
+	}, function(err, user) {
 			if (err) throw err;
 			if(!user) {
 				res.json({success: false, message: 'Oops, you may have entered the wrong username, please go back and try again.'});
-			}else if (user) {
-
+			} else if (user) {
 				if(user.password != req.body.password) {
 					res.json({ success: false, message: 'Wrong password, please try again.'});
-				}else {
-
-				const token = jwt.sign(user, config.secret, {expiresIn: 60 * 60 * 24 * 30});
-
-				res.json({
-					success: true,
-					message: 'Enjoy your hella trill token!',
-					token: token,
-					username: req.body.username,
-					address: user.address
-					});	
+				} else {
+					const token = jwt.sign(user, config.secret, {expiresIn: 60 * 60 * 24 * 30});
+					res.json({
+						success: true,
+						message: 'Enjoy your hella trill token!',
+						token: token,
+						username: req.body.username,
+						address: user.address
+						});	
+					}
 				}
-
-			}
 		})
 };
 
