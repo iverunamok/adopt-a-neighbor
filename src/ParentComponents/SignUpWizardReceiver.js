@@ -9,6 +9,6 @@ export default class SignUpWizardReceiver extends Component {
 	}
 
 	render(){
-		return <div>SIGN UP WIZZZZZARD</div>
+		return <div>There are lot's of Neighbors out there donating their time to help! Just check all that apply to things you need assistance with and we will connect you!</div>
 	}
 }

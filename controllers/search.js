@@ -7,12 +7,13 @@ const jwt = require('jsonwebtoken');
 
 function receive (req, res){
 	console.log(req.user);
-	const zip_code = req.query.zip_code;
-	console.log(zip_code);
+	const addy = req.query.address;
+	const addyPlus = addy.replace(/ /g, "+");
+	console.log(address);
 	const distance = req.query.distance;
 	const first = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 	const last = "&AIzaSyDZImnAo3t9Ye0cjExfCq_0mc38ngMS7lM"
-	const geoURL = first.concat(zip_code).concat(last);
+	const geoURL = first.concat(addyPlus).concat(last);
 	request
 		.get(geoURL)
 			.end(function(err, geoRes){

@@ -16,6 +16,7 @@ const UserSchema = new Schema({
 	"transportation": Boolean,
 	"visiting": Boolean,
 	"errands": Boolean,
+	"technology_help": Boolean,
 	"other": Boolean,
 	"lng": Number,
 	"lat": Number,
