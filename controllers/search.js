@@ -52,29 +52,29 @@ function findFriend(req, res) {
 	)
 }
 
-function fieldMatch(req, res) {
-	console.log(req.user)//check out more of what this is returning, 
-						//figure out how to call "myself" and then match the other users
-	const FIELDS = ['Visiting',
-					'Technology Help',
-					'Yard Work',
-					'Indoor Cleaning',
-					'Filing Paperwork',
-					'Heavy Lifting',
-					'Transportation',
-					'Errands',
-					'Other']
+// function fieldMatch(req, res) {
+// 	console.log(req.user)//check out more of what this is returning, 
+// 						//figure out how to call "myself" and then match the other users
+// 	const FIELDS = ['Visiting',
+// 					'Technology Help',
+// 					'Yard Work',
+// 					'Indoor Cleaning',
+// 					'Filing Paperwork',
+// 					'Heavy Lifting',
+// 					'Transportation',
+// 					'Errands',
+// 					'Other']
 
-	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
-	const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
+// 	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
+// 	const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
 
-	User.find({//check examples of mongoose find examples
-		variable: fieldValues
-		//writing a function to match fieldValues to eachother
+// 	User.find({//check examples of mongoose find examples
+// 		variable: fieldValues
+// 		//writing a function to match fieldValues to eachother
 
-	})
+// 	})
 
-}
+// }
 
 
 
