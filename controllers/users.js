@@ -34,7 +34,6 @@ function create (req, res){
 					res.json(err);
 
 				} else {
-					res.json(result)
 					const token = jwt.sign(user, config.secret);
 					res.send({token: token, result});
 				}
@@ -53,17 +52,22 @@ const update = (req, res) => {
 }
 
 function authenticate(req, res) {
+	console.log('authenticating', req.body)
 	User.findOne({
 		username: req.body.username
 	}, function(err, user) {
+		console.log('found user',user)
 			if (err) throw err;
 			if(!user) {
+				console.log('Wrong username')
 				res.json({success: false, message: 'Oops, you may have entered the wrong username, please go back and try again.'});
 			} else if (user) {
 				if(user.password != req.body.password) {
+					console.log('wrong password')
 					res.json({ success: false, message: 'Wrong password, please try again.'});
 				} else {
 					const token = jwt.sign(user, config.secret, {expiresIn: 60 * 60 * 24 * 30});
+					console.log('Login successful')
 					res.json({
 						success: true,
 						message: 'Enjoy your hella trill token!',
@@ -73,7 +77,8 @@ function authenticate(req, res) {
 						});	
 					}
 				}
-		})
+		}
+	)
 };
 
 module.exports = {
