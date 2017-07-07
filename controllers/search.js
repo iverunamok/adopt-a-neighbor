@@ -4,6 +4,7 @@ const User = require('../models/users');
 const GeoJSON = require('geojson');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const {HELP_FIELDS, variable} = require('../src/config')
 
 function receive (req, res){
 	console.log(req.user);
@@ -79,17 +80,7 @@ function findFriend(req, res) {
 function fieldMatch(req, res) {
 	console.log("hellloooooo", req.user)//check out more of what this is returning, 
 					//figure out how to call "myself" and then match the other users
-	const FIELDS = ['Visiting',
-					'Technology Help',
-					'Yard Work',
-					'Indoor Cleaning',
-					'Filing Paperwork',
-					'Heavy Lifting',
-					'Transportation',
-					'Errands',
-					'Other']
 
-	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
 
 	User.findOne({
 			username: req.user.username
@@ -97,7 +88,7 @@ function fieldMatch(req, res) {
 			if (err) {
 				throw err;
 			}
-			const helpFields = FIELDS.map(variable)
+			const helpFields = HELP_FIELDS.map(variable)
 									 .filter((variable) => user[variable])
 									 .map(variable => {
 									 	const obj = {}

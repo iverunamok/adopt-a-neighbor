@@ -1,23 +1,13 @@
 import React, {Component} from 'react'; 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+const {HELP_FIELDS, variable} = require('../config');
 
-const FIELDS = ['Visiting',
-				'Technology Help',
-				'Yard Work',
-				'Indoor Cleaning',
-				'Filing Paperwork',
-				'Heavy Lifting',
-				'Transportation',
-				'Errands',
-				'Other']
-
-const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
 
 export default class SignUpWizardHelper extends Component {
 	constructor(props){
 	    super(props)
 	    this.state = {};
-	   	FIELDS.forEach(field => this.state[variable(field)] = false)
+	   	HELP_FIELDS.forEach(field => this.state[variable(field)] = false)
 	}
   	toggle = (field) => () => {
   		const update = {}
@@ -44,7 +34,7 @@ export default class SignUpWizardHelper extends Component {
 			<div>
 				<p>Thank you for gifting your skillzzzzz to the community!! Let us know WHAT YA GOT by checking all that apply! </p>
 				{
-					FIELDS.map(field => (
+					HELP_FIELDS.map(field => (
 						<div>
         					<input
         						name="visit" type="checkbox" checked={this.state[variable(field)]} onChange={toggle(variable(field))} />

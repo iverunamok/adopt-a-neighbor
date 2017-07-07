@@ -9,7 +9,7 @@ const userController = require('../controllers/users');
 const messagesController = require('../controllers/messages');
 const searchesController = require('../controllers/search');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+const config = require('../src/config');
 
 
 const port = process.env.PORT || 3001;

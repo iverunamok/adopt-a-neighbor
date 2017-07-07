@@ -1,6 +1,6 @@
 const User = require('../models/users');
 const request = require('superagent');
-const config = require('../config');
+const config = require('../src/config');
 const jwt = require('jsonwebtoken');
 
 
