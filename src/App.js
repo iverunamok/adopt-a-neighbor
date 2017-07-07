@@ -5,15 +5,19 @@ import Login from './ParentComponents/Login'
 import Messages from './ParentComponents/Messages'
 import Home from './ParentComponents/Home'
 import Neighbors from './ParentComponents/Neighbors'
-import SignUpWizard from './ParentComponents/SignUpWizard'
+import HelperChooser from './ParentComponents/HelperChooser'
 import SignUpWizard2 from './ParentComponents/SignUpWizard2'
 import SignUpWizardHelper from './ParentComponents/SignUpWizardHelper'
 import SignUpWizardReceiver from './ParentComponents/SignUpWizardReceiver'
+
+
 
 export default class App extends Component {
   state = {
     token : ''
   }
+
+  userInfo = (Comp) => (props) => <Comp {...props} username={this.state.username} token={this.state.token} cookieLoaded={this.state.cookieLoaded}/>
 
 
   componentDidMount(){ //research componentDidMount
@@ -57,9 +61,9 @@ export default class App extends Component {
           <Route path="/Home" component={() => <Home token={this.state.token}/>}/>
           <Route path="/Messages" component={() => <Messages token={this.state.token}/>}/>
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token}/>}/>
-          <Route path="/SignUpWizard" component={SignUpWizard}/>
+          <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
           <Route path="/SignUpWizard2" component={SignUpWizard2}/>
-          <Route path="/SignUpWizardHelper" component={SignUpWizardHelper}/>
+          <Route path="/SignUpWizardHelper" component={this.userInfo(SignUpWizardHelper)}/>
           <Route path="/SignUpWizardReceiver" component={SignUpWizardReceiver}/> 
         </div> 
       </Router>

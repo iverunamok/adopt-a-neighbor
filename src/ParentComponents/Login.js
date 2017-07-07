@@ -7,7 +7,7 @@ export default class Login extends Component {
 		super(props)
 		this.state = {
 			username: "",
-			password: ""
+			password: "",
 		};
 	}
 	userName(event) {
@@ -16,7 +16,6 @@ export default class Login extends Component {
 	passWord(event) {
 		this.setState({password: event.target.value});
 	}
-
 	submitLogin(){
 		fetch('/api/authenticate', {
   				method: 'POST',
