@@ -1,78 +1,62 @@
 import React, {Component} from 'react'; 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
+const FIELDS = ['Visiting',
+				'Technology Help',
+				'Yard Work',
+				'Indoor Cleaning',
+				'Filing Paperwork',
+				'Heavy Lifting',
+				'Transportation',
+				'Errands',
+				'Other']
+
+const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
 
 export default class SignUpWizardHelper extends Component {
 	constructor(props){
 	    super(props)
-	    this.state = {
-	      technology_help: false,
-	      yard_work: false,
-	      indoor_cleaning: false,
-	      filing_paperwork: false,
-	      heavy_lifting: false,
-	      transportation: false,
-	      visiting: false,
-	      errands: false,
-	      other: false,
-	    };
+	    this.state = {};
+	   	FIELDS.forEach(field => this.state[variable(field)] = false)
 	}
-	techChange (event) {
-		this.setState({technology_help: !this.state.technology_help})
+  	toggle = (field) => () => {
+  		const update = {}
+  		update[field] = !this.state[field]
+  		this.setState(update)
 	}
-    yardChange (event) {
-    	this.setState({yard_work: !this.state.yard_work})
-  	}
-  	indoorChange (event) {
-    	this.setState({indoor_cleaning: !this.state.indoor_cleaning})
-  	}
-  	filingChange (event) {
-    	this.setState({filing_paperwork: !this.state.filing_paperwork})
-  	}
-  	liftingChange (event) {
-    	this.setState({heavy_lifting: !this.state.heavy_lifting})
-  	}
-  	transportChange (event) {
-    	this.setState({transportation: !this.state.transportation})
-  	}
-  	visitChange (event) {
-    	this.setState({visiting: !this.state.visiting})
-  	}
-  	errandChange (event) {
-    	this.setState({errands: !this.state.errands})
-  	}
-  	otherChange (event) {
-    	this.setState({other: !this.state.other})
-  	}
+	clickButton(){
+		fetch('/user', {
+  			   method: 'PUT',
+  			   headers: {
+                  'Content-Type': 'application/json'
+  				},
+  				body: JSON.stringify({
+    				username: this.props.username,
+    				...this.state,
+    				token: this.props.token
+  				})
+		})
 
+	}
 	render(){
+		const { toggle } = this
 		return(
 			<div>
 				<p>Thank you for gifting your skillzzzzz to the community!! Let us know WHAT YA GOT by checking all that apply! </p>
-				<div>
-					<input
-						name="tech" type="checkbox" checked={this.state.technology_help} onChange={this.techChange.bind(this)} />
-					<label> Technology Help </label>
-				</div>
-				<div>
-					<input
-	    				name="yard" type="checkbox" checked={this.state.yard_work} onChange={this.yardChange.bind(this)} />
-	    			<label> Yardwork </label>
-	    		</div>	
-	    		 <div>	
-        			<input
-        				name="indoor" type="checkbox" checked={this.state.indoor_cleaning} onChange={this.indoorChange.bind(this)} />
-        			<label> Indoor Cleaning </label>
-        		</div>
+				{
+					FIELDS.map(field => (
+						<div>
+        					<input
+        						name="visit" type="checkbox" checked={this.state[variable(field)]} onChange={toggle(variable(field))} />
+        					<label> {field} </label>
+        				</div>
+						))
+				}
+				
         		<div>
-        			<input
-        				name="filing" type="checkbox" checked={this.state.filing_paperwork} onChange={this.filingChange.bind(this)} />
-        			<label> Filing Paperwork </label>
-
-        		</div>
-        		
+					<Link to="/Home"><button onClick={this.clickButton.bind(this)}>Submit</button></Link>
+    			</div>
     		</div>	
         )
 	}
 }
-

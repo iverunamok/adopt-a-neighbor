@@ -63,7 +63,7 @@ export default class App extends Component {
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token}/>}/>
           <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
           <Route path="/SignUpWizard2" component={SignUpWizard2}/>
-          <Route path="/SignUpWizardHelper" component={SignUpWizardHelper}/>
+          <Route path="/SignUpWizardHelper" component={this.userInfo(SignUpWizardHelper)}/>
           <Route path="/SignUpWizardReceiver" component={SignUpWizardReceiver}/> 
         </div> 
       </Router>

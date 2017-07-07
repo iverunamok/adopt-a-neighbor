@@ -35,14 +35,14 @@ function requireLogin(req, res, next) {
 				return res.json({ success: false, message: 'Failed to authenticate token.' });
 			} else {
 			//if everything is good, save to request for use in other routes
-				req.decoded = decoded;
+				req.decoded = decoded;//where you get currently logged in user
 				req.user = decoded._doc //as long as we're loggin in we can refer to the user info by req.user
 				next();
 			}
 		});
 	} else {
 	//if there is no token
-	//return an error
+	//return an error-
 		return res.status(403).send({
 			success: false,
 			message: 'No token provided.'
@@ -57,6 +57,7 @@ app.get('/messages', requireLogin, messagesController.receive)
 app.get('/profile', requireLogin, (req,res) => res.json(req.user))
 app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)
+app.get('/fieldMatch/', requireLogin, searchesController.fieldMatch)
 app.get('/sentMessages', requireLogin, messagesController.sentMessages)
 
 app.listen(port)
