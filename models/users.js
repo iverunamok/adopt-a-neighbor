@@ -1,23 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
+const {HELP_FIELDS, variable} = require('../src/config')
 
 
-const UserSchema = new Schema({
+const schema = {
 	"imgURL": String,
 	"username": {type: String, required: true},
 	"password": {type: String, required: true},
 	"admin": {type: Boolean, default: false},
 	"address": String,
 	"helper": Boolean,
-	"yard_work": {type: Boolean, default: false},
-	"indoor_cleaning": {type: Boolean, default: false},
-	"filing_paperwork": {type: Boolean, default: false},
-	"heavy_lifting": {type: Boolean, default: false},
-	"transportation": {type: Boolean, default: false},
-	"visiting": {type: Boolean, default: false},
-	"errands": {type: Boolean, default: false},
-	"technology_help": {type: Boolean, default: false},
-	"other": {type: Boolean, default: false},
 	"lng": Number,
 	"lat": Number,
 	location: {
@@ -27,7 +19,13 @@ const UserSchema = new Schema({
 		},
 		coordinates: [Number]
 	}
-})
+}
+
+HELP_FIELDS.map(variable)
+	       .forEach(variable => schema[variable] = {type: Boolean, default: false})
+
+
+const UserSchema = new Schema(schema)
 UserSchema.index({location: '2dsphere'});
 
 module.exports = mongoose.model('User', UserSchema);

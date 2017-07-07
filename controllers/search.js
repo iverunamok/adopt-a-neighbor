@@ -4,6 +4,7 @@ const User = require('../models/users');
 const GeoJSON = require('geojson');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const {HELP_FIELDS, variable} = require('../src/config')
 
 function receive (req, res){
 	console.log(req.user);
@@ -52,33 +53,78 @@ function findFriend(req, res) {
 	)
 }
 
+// function fieldMatch(req, res) {
+// 	console.log(req.user)//check out more of what this is returning, 
+// 						//figure out how to call "myself" and then match the other users
+// 	const FIELDS = ['Visiting',
+// 					'Technology Help',
+// 					'Yard Work',
+// 					'Indoor Cleaning',
+// 					'Filing Paperwork',
+// 					'Heavy Lifting',
+// 					'Transportation',
+// 					'Errands',
+// 					'Other']
+
+// 	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
+// 	const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
+
+// 	User.find({//check examples of mongoose find examples
+// 		variable: fieldValues
+// 		//writing a function to match fieldValues to eachother
+
+// 	})
+<<<<<<< HEAD
+=======
+
+// }
+
 function fieldMatch(req, res) {
-	console.log(req.user)//check out more of what this is returning, 
-						//figure out how to call "myself" and then match the other users
-	const FIELDS = ['Visiting',
-					'Technology Help',
-					'Yard Work',
-					'Indoor Cleaning',
-					'Filing Paperwork',
-					'Heavy Lifting',
-					'Transportation',
-					'Errands',
-					'Other']
+	console.log("hellloooooo", req.user)//check out more of what this is returning, 
+					//figure out how to call "myself" and then match the other users
 
-	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
-	const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
 
-	User.find({//check examples of mongoose find examples
-		variable: fieldValues
-		//writing a function to match fieldValues to eachother
+	User.findOne({
+			username: req.user.username
+		} ,(err, user) => {
+			if (err) {
+				throw err;
+			}
+			const helpFields = HELP_FIELDS.map(variable)
+									 .filter((variable) => user[variable])
+									 .map(variable => {
+									 	const obj = {}
+									 	obj[variable] = true;
+									 	return obj
+									 })
+			User.find({
+					helper: !user.helper,
+					$or : helpFields
+				}, {password: false}, (err, users) => {
+				res.json(users)
+			})	
 
-	})
+		})
 
-}
+
+
+
+
+	// const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
+
+	// User.find({//check examples of mongoose find examples
+	// 	variable: fieldValues
+	// 	//writing a function to match fieldValues to eachother
+
+	// })
+>>>>>>> 4260fdd70e98abce25f3e5894970f952126bb61c
+
+// }
 
 
 
 module.exports={
 	findFriend: findFriend,
-	receive: receive
+	receive: receive,
+	fieldMatch: fieldMatch
 }
