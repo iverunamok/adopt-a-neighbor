@@ -57,7 +57,7 @@ app.get('/messages', requireLogin, messagesController.receive)
 app.get('/profile', requireLogin, (req,res) => res.json(req.user))
 app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)
-app.get('/fieldMatch/', requireLogin, searchesController.fieldMatch)
+// app.get('/fieldMatch/', requireLogin, searchesController.fieldMatch)
 app.get('/sentMessages', requireLogin, messagesController.sentMessages)
 
 app.listen(port)
