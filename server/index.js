@@ -9,7 +9,7 @@ const userController = require('../controllers/users');
 const messagesController = require('../controllers/messages');
 const searchesController = require('../controllers/search');
 const jwt = require('jsonwebtoken');
-const config = require('../config');
+const config = require('../src/config');
 
 
 const port = process.env.PORT || 3001;
@@ -57,7 +57,7 @@ app.get('/messages', requireLogin, messagesController.receive)
 app.get('/profile', requireLogin, (req,res) => res.json(req.user))
 app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)
-//app.get('/fieldMatch/', requireLogin, searchesController.fieldMatch)
+app.get('/fieldMatch', requireLogin, searchesController.fieldMatch)
 app.get('/sentMessages', requireLogin, messagesController.sentMessages)
 
 app.listen(port)
