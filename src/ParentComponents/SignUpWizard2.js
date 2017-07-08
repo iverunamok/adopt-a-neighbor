@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-
 export default class SignUpWizard2 extends Component {
 	constructor(props){
 		super(props)
@@ -9,42 +8,41 @@ export default class SignUpWizard2 extends Component {
 			username: "",
 			password: "",
 			address: "",
-
 		};
 		console.log("Constructor did things")
 	}
-
-
 
 	userName(event) {
 		console.log("Set the username to ", this.state.userName)
 		this.setState({username: event.target.value});
 	}
+
 	passWord(event) {
 		this.setState({password: event.target.value});
 	}
+
 	userAddress(event) {
-		this.setState({password: event.target.value});
+		this.setState({address: event.target.value});
 	}
 
 	submitLogin(){
-		fetch('/api/authenticate', {
-  				method: 'POST',
-  			 	headers: {
-    				'Content-Type': 'application/json'
-  			 	},
-  				body: JSON.stringify(this.state)
-		})
-		.then(resp => resp.json())
-		.then(json =>{
-			 const {token, username} = json
-			 this.props.login({token, username})
-			 this.context.router.history.push('/Home')
-		})
-
-console.log("PHASE 3 - TOKEN")
-
+		console.log("sexy AF");
+		// fetch('/api/authenticate', {
+  	// 			method: 'POST',
+  	// 		 	headers: {
+    // 				'Content-Type': 'application/json'
+  	// 		 	},
+  	// 			body: JSON.stringify(this.state)
+		// })
+		// .then(resp => resp.json())
+		// .then(json =>{
+		// 	 const {token, username} = json
+		// 	 this.props.login({token, username})
+		// 	 this.context.router.history.push('/Home')
+		// })
+		// console.log("PHASE 3 - TOKEN")
 	}
+
 	keyPress(event){
 		if(event.key === 'Event'){
 			this.submitLogin()
@@ -56,39 +54,48 @@ console.log("PHASE 3 - TOKEN")
 	}
 
 	render(){
-		return <div>SIGN UP WIZZZZZARD</div>
-
+		return(
+			<div>
+					<div>
+						Username: <input placeholder="Type in your username here"/>
+					</div>
+					<div>
+						Password: <input type="password" placeholder="Enter password"/>
+					</div>
+					<div>
+						Address: <input type="address"  placeholder="Enter Your Address"/>
+					</div>
+					<button onClick={this.submitLogin.bind(this)}> Login</button>
+			</div>
+		)
 	}
 }
 
-
-
-
-	render(){
-			console.log("processed return")
-			const {username, password, address} = this.state.event
-			return(
-				<div>
-					<div>
-						Username: <input value={username} placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
-					</div>
-					<div>
-						Password: <input type="password" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
-					</div>
-					</div>
-				</div>
-				Address: <imput type="address" value={address} placeholder="Enter Your Address" onChange={this.address.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
-				</div>
-			</div>
-					<button onClick={this.submitLogin.bind(this)}> Login</button>
-				</div>
-			</div>)
-		)}
-}
-
-Login.contextTypes = {
-  router: React.PropTypes.object
-}
+// 	render()
+// 			console.log("processed return")
+// 			const {username, password, address} = this.state.event
+// 			return(
+// 				<div>
+// 					<div>
+// 						Username: <input value={username} placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
+// 					</div>
+// 						<div>
+// 							Password: <input type="password" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
+// 						</div>
+// 					</div>
+// 					</div>
+// 						Address: <imput type="address" value={address} placeholder="Enter Your Address" onChange={this.address.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
+// 					</div>
+// 			</div>
+// 					<button onClick={this.submitLogin.bind(this)}> Login</button>
+// 				</div>
+// 			</div>)
+// 		)
+// }
+//
+// Login.contextTypes = {
+//   router: React.PropTypes.object
+// }
 //
 // // BOWWOWBUDDIES
 // import React, { Component } from 'react'
