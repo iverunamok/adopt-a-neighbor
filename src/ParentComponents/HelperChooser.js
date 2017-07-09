@@ -27,12 +27,12 @@ export default class HelperChooser extends Component {
 			this.props.history.push('/Login')
 		}
 		return(<div>
-			<div>Are you a here to help neighbors?</div>
-			<form action="">
-				<Link to="/SignUpWizardHelper"><button onClick={this.clickButton(true)}>Helper</button></Link>
+				<div>Are you a here to help neighbors?</div>
+					<form action="">
+						<Link to="/SignUpWizardHelper"><button onClick={this.clickButton(true)}>Helper</button></Link>
 				<div>Are you here to receive support from neighbors?</div>
-				<Link to="/SignUpWizardReceiver"><button onClick={this.clickButton(false)}>Receiver</button></Link><br />
-			</form>
-		</div>)
+						<Link to="/SignUpWizardReceiver"><button onClick={this.clickButton(false)}>Receiver</button></Link><br />
+					</form>
+				</div>)
 	}
 }

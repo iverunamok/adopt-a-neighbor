@@ -53,6 +53,8 @@ function findFriend(req, res) {
 	)
 }
 
+
+
 function fieldMatch(req, res) {
 	console.log("hellloooooo", req.user)//check out more of what this is returning,
 					//figure out how to call "myself" and then match the other users
@@ -79,7 +81,12 @@ function fieldMatch(req, res) {
 			})
 
 		})
+
 }
+
+
+
+
 module.exports={
 	findFriend: findFriend,
 	receive: receive,
