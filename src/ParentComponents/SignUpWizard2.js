@@ -26,32 +26,27 @@ export default class SignUpWizard2 extends Component {
 	}
 
 	submitLogin(){
-		console.log("sexy AF");
-		// fetch('/api/authenticate', {
-  	// 			method: 'POST',
-  	// 		 	headers: {
-    // 				'Content-Type': 'application/json'
-  	// 		 	},
-  	// 			body: JSON.stringify(this.state)
-		// })
-		// .then(resp => resp.json())
-		// .then(json =>{
-		// 	 const {token, username} = json
-		// 	 this.props.login({token, username})
-		// 	 this.context.router.history.push('/Home')
-		// })
-		// console.log("PHASE 3 - TOKEN")
-	}
+		console.log("TEST");
+		        fetch('/user', {
+		                  method: 'PUT',
+		                   headers: {
+		                    'Content-Type': 'application/json'
+		                   },
+		                  body: JSON.stringify({
+		                      username: this.props.username,
+													password: this.props.password,
+													address: this.props.address
+		            })
+					})
+		 }
+
 
 	keyPress(event){
-		if(event.key === 'Event'){
+		if(event.key === 'Enter'){
 			this.submitLogin()
 		}
 	}
 
-	state = {
-		key: 'value'
-	}
 
 	render(){
 		return(
@@ -65,7 +60,9 @@ export default class SignUpWizard2 extends Component {
 					<div>
 						Address: <input type="address"  placeholder="Enter Your Address"/>
 					</div>
-					<button onClick={this.submitLogin.bind(this)}> Login</button>
+					<form action="">
+						<Link to="/Login"><button onClick={this.submitLogin.bind(this)}> Submit</button></Link>
+					</form>
 			</div>
 		)
 	}
