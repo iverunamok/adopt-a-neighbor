@@ -1,7 +1,46 @@
 import React, {Component} from 'react'; 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import fieldMatch from '../controllers/search.js'
 
+// export default class Neighbors extends Component {
+//   constructor(props){
+//     super(props)
+//     console.log(props)
+//     this.state = {
+//       userlist: []
+//     };
+//   }
+
+//   componentDidMount() {
+//     this.loadData()
+//   }
+  
+//   loadData(){
+//     fetch ('/api/user?token=' + this.props.token)
+//       .then(response => response.json())
+//       .then(json => {
+//         console.log(json)
+//         this.setState({
+//           userlist: json
+//         })
+//       })
+//   }
+
+//   render(){
+//     const { users } = this.state
+//     console.log(users)
+//     return (
+//       <ul>
+//         { users ? (
+//           users.map(user => (
+//             <li>user.username</li>
+//           ))
+//         ) : (
+//           <li>Loading...</li>
+//         )}
+//       </ul>
+//     )
+//   }
+// }
 
 export default class Neighbors extends Component {
 	constructor(props){
@@ -11,45 +50,43 @@ export default class Neighbors extends Component {
           userlist: []
     };
  }
- 	searchResult(){
-    const self = this
-    $.get('/api/user?token=' + this.props.token,//need to change this jquery to
-          function(response){ 
-              self.setState({userlist : response})
-          })
+  
+  fetchingUsers(){
+    console.log("here????", this.state.userlist)
+    fetch('/fieldMatch', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...this.state.userlist,
+        token: this.props.token
+      })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        this.setState({
+          userlist: json
+        });
+      })
+    })
   }
 
-  getUsers(){
-  	fetch('/fieldMatch', {
-  		method: 'GET',
-		headers: {
-  			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(this.state)
-  	})
-  	
+  render(){
+    const { users } = this.state
+    console.log("WEEEEEEeeeeeee is this working", users)
+    return (
+      <div>
+        <ul>
+          { users ? (
+            users.map(user => (
+              <li>user.username</li>
+            ))
+          ) : (
+            <li>Loading...</li>
+          )}
+        </ul>
+      </div>
+    )
   }
-
-submitLogin(){
-		fetch('/api/authenticate', {
-  				method: 'POST',
-  			 	headers: {
-    				'Content-Type': 'application/json'
-  			 	},
-  				body: JSON.stringify(this.state)
-		})
-		.then(resp => resp.json())
-		.then(json =>{
-			 const {token, username} = json
-			 this.props.login({token, username})
-			 this.context.router.history.push('/Home')
-		})
-	
-	}
-
-	render(){
-		console.log(searchResult)
-		return 
-		
-	}
 }
