@@ -56,9 +56,8 @@ function findFriend(req, res) {
 
 
 function fieldMatch(req, res) {
-	console.log("hellloooooo", req.user)//check out more of what this is returning,
-					//figure out how to call "myself" and then match the other users
 
+	console.log("hellloooooo", req.user)
 
 	User.findOne({
 			username: req.user.username
@@ -81,14 +80,9 @@ function fieldMatch(req, res) {
 			})
 
 		})
+	}
 
-}
-
-
-
-
-module.exports={
+module.exports= {
 	findFriend: findFriend,
 	receive: receive,
-	fieldMatch: fieldMatch
-}
+	fieldMatch: fieldMatch }
