@@ -15,9 +15,18 @@ const config = require('../src/config');
 const port = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/adoptaneighbor');
 app.set('superSecret', config.secret);
-
+app.use(express.static('public'))
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  next();
+});
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+
 //app.use(morgan)('dev');
 
 //const upload = multer({storage: storage}).single("profilePicture")
@@ -51,6 +60,7 @@ function requireLogin(req, res, next) {
 }
 app.post('/api/authenticate', userController.authenticate)
 app.post('/user', userController.create)
+app.get('/test')
 app.put('/user', userController.update)
 app.post('/messages', requireLogin, messagesController.create)
 app.get('/messages', requireLogin, messagesController.receive)

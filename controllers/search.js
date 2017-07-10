@@ -7,11 +7,10 @@ const jwt = require('jsonwebtoken');
 const {HELP_FIELDS, variable} = require('../src/config')
 
 function receive (req, res){
-	console.log(req.user);
+	console.log(req.query);
 	const addy = req.query.address;
 	const addyPlus = addy.replace(/ /g, "+");
-	console.log(address);
-	const distance = 15; //changed this from req.query.distance;
+	const distance = req.query.distance;
 	const first = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 	const last = "&AIzaSyDZImnAo3t9Ye0cjExfCq_0mc38ngMS7lM"
 	const geoURL = first.concat(addyPlus).concat(last);

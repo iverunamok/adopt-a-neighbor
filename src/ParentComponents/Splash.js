@@ -24,7 +24,7 @@ export default class Splash extends Component {
           We believe our local communities can work together to create a united neighborhood that supports and offers hands-on assistance to elders. Joining your community will allow you to send requests for support, or to participate as a helpful neighbor. You will be linked with people in <b>Your</b> neighborhood. Please join the Adopt-A-Neighbor community as a <i>helper</i> or <i>receiver</i> by clicking on New Neighbor.
         </div>
         <div className="panel-footer">
-            <Link to="/HelperChooser"><button type="button" className="btn btn-primary">JOIN NOW</button></Link>
+            <Link to="/SignUpWizard2"><button type="button" className="btn btn-primary">JOIN NOW</button></Link>
         </div>
       </div>
   </div>

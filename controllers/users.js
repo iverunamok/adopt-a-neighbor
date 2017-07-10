@@ -35,7 +35,9 @@ function create (req, res){
 
 				} else {
 					const token = jwt.sign(user, config.secret);
-					res.send({token: token, result});
+					res.send({
+						username: req.body.username,
+						token: token, result});
 				}
 			})	
 	})
