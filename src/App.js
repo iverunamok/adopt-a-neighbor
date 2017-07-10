@@ -37,7 +37,7 @@ export default class App extends Component {
   logout(){
     document.cookie = ''; //on logout we set that cookie to mean absolutely nothing and that way we have no access :(
     this.setState({token: '', cookieLoaded: false, address: '', username: ''}) // resets all your data to nothing, becuase that's what you are when you leave our site.
-    // browserHistory.push('/Login')// sends you back to the login page; 
+    // =browserHistory.push('/Login')// sends you back to the login page; 
   }
 
 
@@ -58,11 +58,11 @@ export default class App extends Component {
           </div>
           <Route exact path="/" component={() => <Splash  token={this.state.token}/>}/>
           <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>
-          <Route path="/Home" component={() => <Home token={this.state.token}/>}/>
+          <Route path="/Home" component={() => <Home username={this.state.username} token={this.state.token}/>}/>
           <Route path="/Messages" component={() => <Messages token={this.state.token}/>}/>
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token}/>}/>
           <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
-          <Route path="/SignUpWizard2" component={SignUpWizard2}/>
+          <Route path="/SignUpWizard2" component={(props) => <SignUpWizard2 {...props} token={this.state.token} login={this.login.bind(this)}/>}/>
           <Route path="/SignUpWizardHelper" component={this.userInfo(SignUpWizardHelper)}/>
           <Route path="/SignUpWizardReceiver" component={SignUpWizardReceiver}/> 
         </div> 

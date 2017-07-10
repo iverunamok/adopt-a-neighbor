@@ -19,7 +19,6 @@ export default class HelperChooser extends Component {
 
 	}
 
-
 	render(){
 		console.log('Here are the props', this.props)
 		if (!this.props.token && this.props.cookieLoaded){
@@ -28,11 +27,11 @@ export default class HelperChooser extends Component {
 		}
 		return(<div>
 				<div>Are you a here to help neighbors?</div>
-					<form action="">
+					<div>
 						<Link to="/SignUpWizardHelper"><button onClick={this.clickButton(true)}>Helper</button></Link>
 				<div>Are you here to receive support from neighbors?</div>
 						<Link to="/SignUpWizardReceiver"><button onClick={this.clickButton(false)}>Receiver</button></Link><br />
-					</form>
+					</div>
 				</div>)
 	}
 }
