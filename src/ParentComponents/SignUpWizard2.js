@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 export default class SignUpWizard2 extends Component {
-<<<<<<< Updated upstream
+
 	constructor(props){
 		super(props)
 		this.state = {
@@ -69,8 +69,6 @@ export default class SignUpWizard2 extends Component {
 	}
 }
 
-// 	render()
-=======
 // 	constructor(props){
 // 		super(props)
 // 		this.state = {
@@ -133,7 +131,6 @@ export default class SignUpWizard2 extends Component {
 
 
 // 	render(){
->>>>>>> Stashed changes
 // 			console.log("processed return")
 // 			const {username, password, address} = this.state.event
 // 			return(
@@ -141,7 +138,6 @@ export default class SignUpWizard2 extends Component {
 // 					<div>
 // 						Username: <input value={username} placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
 // 					</div>
-<<<<<<< Updated upstream
 // 						<div>
 // 							Password: <input type="password" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
 // 						</div>
@@ -149,7 +145,6 @@ export default class SignUpWizard2 extends Component {
 // 					</div>
 // 						Address: <imput type="address" value={address} placeholder="Enter Your Address" onChange={this.address.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
 // 					</div>
-=======
 // 					<div>
 // 						Password: <input type="password" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
 // 					</div>
@@ -157,26 +152,22 @@ export default class SignUpWizard2 extends Component {
 // 				</div>
 // 				Address: <imput type="address" value={address} placeholder="Enter Your Address" onChange={this.address.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
 // 				</div>
->>>>>>> Stashed changes
 // 			</div>
 // 					<button onClick={this.submitLogin.bind(this)}> Login</button>
 // 				</div>
 // 			</div>)
-<<<<<<< Updated upstream
 // 		)
 // }
 //
 // Login.contextTypes = {
 //   router: React.PropTypes.object
 // }
-=======
 // 		)}
 // }
 
 // Login.contextTypes = {
 //   router: React.PropTypes.object
-}
->>>>>>> Stashed changes
+//}
 //
 // // BOWWOWBUDDIES
 // import React, { Component } from 'react'
