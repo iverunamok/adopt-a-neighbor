@@ -10,7 +10,7 @@ const messagesController = require('../controllers/messages');
 const searchesController = require('../controllers/search');
 const jwt = require('jsonwebtoken');
 const config = require('../src/config');
-
+const path = require('path');
 
 const port = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/adoptaneighbor');
@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //const upload = multer({storage: storage}).single("profilePicture")
 
 
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 function requireLogin(req, res, next) {
 	// check header or url parameters or post parameters for token

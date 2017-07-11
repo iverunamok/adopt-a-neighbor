@@ -1,24 +1,101 @@
+
+
+body {
+  font-family: 'Vast Shadow', cursive;
+  font-weight: normal;
+  font-style: normal;
+  background-image: url("/images/Myles_Randy1.jpg")
+}
+
+
 .App {
-  text-align: center;
+  text-align: left;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+p {
+  font-size: 1.5em;
+  color: red;
+  background-color: transparent;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+div {
+  
 }
 
-.App-intro {
-  font-size: large;
+
+/*.UserProfile ul {
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/*Login page styling*/
+
+/*.header2{
+  font-size: 25px;
+  margin-top: -25px;
 }
+.LoginPageContainer {
+  margin-top: -115px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  background: white;
+  height: 60vh;
+}
+
+.LoginHeader {
+  display: inline-flex;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 30px;
+  margin-bottom: auto;
+  justify-content: column;
+  flex-direction: column;
+}
+.LoginForm {
+  flex-wrap: wrap;
+  border: 2px solid #1cbe83;
+  border-width: .5px;
+  border-radius: 5px;
+  padding: 1em;
+  margin: .6em;
+
+}*/
+
+/*.LoginForm > * {
+  align-items: top;
+  width: auto;
+  border: 1;
+  line-height: .5;
+  background: white;
+  font-size: 15px;
+  border-radius: 5px;
+}
+.LoginButton{
+  display: inline-flex;
+  flex-direction: column;
+  width: 10em;
+  margin: 1px;
+  margin-top: -55px;
+  margin-bottom: 10em;
+  padding-bottom: 5px;
+  background: white;
+  justify-content: column;
+  position: relative;
+  top: -5.5em;
+}
+input[type="textbox"] {
+  padding: .4em;
+  align-items: left;
+  flex-basis:500px;
+  margin: 10px;
+}
+
+input[type="password"] {
+  padding: .4em;
+  text-align: left;
+  flex-basis:500px;
+  margin: 10px;
+}*/
+
+
