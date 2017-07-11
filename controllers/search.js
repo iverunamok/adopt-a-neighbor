@@ -53,6 +53,19 @@ function findFriend(req, res) {
 }
 
 
+<<<<<<< Updated upstream
+=======
+// 	const variable = (label) => label.toLowerCase().replace(/\s/g, '_')
+// 	const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
+
+// 	User.find({//check examples of mongoose find examples
+// 		variable: fieldValues
+// 		//writing a function to match fieldValues to eachother
+
+// 	})
+
+// }
+>>>>>>> Stashed changes
 
 function fieldMatch(req, res) {
 
@@ -81,7 +94,28 @@ function fieldMatch(req, res) {
 		})
 	}
 
+<<<<<<< Updated upstream
 module.exports= {
+=======
+
+
+
+
+	// const fieldValues = FIELDS.forEach(field => this.params[variable(field)]
+
+	// User.find({//check examples of mongoose find examples
+	// 	variable: fieldValues
+	// 	//writing a function to match fieldValues to eachother
+
+	// })
+
+
+}
+
+
+
+module.exports={
+>>>>>>> Stashed changes
 	findFriend: findFriend,
 	receive: receive,
 	fieldMatch: fieldMatch }
