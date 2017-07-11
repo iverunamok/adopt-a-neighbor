@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 function create (req, res){
 	console.log('body', req.body);
+	console.log('file', req.file);
 	const addy = req.body.address;
 	const addyPlus = addy.replace(/ /g, "+");
 	const first = "http://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -17,7 +18,7 @@ function create (req, res){
 			const location = JSON.parse(geoRes.text).results[0].geometry.location;
 			const user = new User ({
 				//imgURL: (req.file ? req.file.path.split('public')[1] : ""),
-				
+				profilePic: req.file.filename,
 				username: req.body.username,
 				password: req.body.password,
 				address: req.body.address,
@@ -39,7 +40,7 @@ function create (req, res){
 						username: req.body.username,
 						token: token, result});
 				}
-			})	
+			})
 	})
 }
 
@@ -76,7 +77,7 @@ function authenticate(req, res) {
 						token: token,
 						username: req.body.username,
 						address: user.address
-						});	
+						});
 					}
 				}
 		}
@@ -88,4 +89,3 @@ module.exports = {
 	create: create,
 	authenticate: authenticate
 }
-

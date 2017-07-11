@@ -12,6 +12,7 @@ const schema = {
 	"helper": Boolean,
 	"lng": Number,
 	"lat": Number,
+	"profilePic": String,
 	location: {
 		type: {
 			type: String,
