@@ -1,4 +1,4 @@
-//the index.js is the brain of the backend, 
+//the index.js is the brain of the backend,
 //has all the routes in it
 const express = require('express');
 const morgan = require('morgan');
@@ -10,6 +10,7 @@ const messagesController = require('../controllers/messages');
 const searchesController = require('../controllers/search');
 const jwt = require('jsonwebtoken');
 const config = require('../src/config');
+const multer = require('multer');
 const path = require('path');
 
 const port = process.env.PORT || 3001;
@@ -25,11 +26,27 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+var suffix = {
+  'image/jpeg' : 'jpg',
+  'image/png' : 'png'
+}
+if(config.env === 'prod'){
+  app.use(express.static('build'))
+}
+app.use(express.static('public'))
 
+var storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    console.log('directory ',path.join(__dirname, '../public/profilePictures/'))
+    cb(null,path.join(__dirname, '../public/profilePictures'))
+  },
+  filename: function (req, file, cb){
+    console.log('naming file',  file.fieldname + Date.now() +'.'+ suffix[file.mimetype])
+    cb(null, file.fieldname + Date.now() +'.'+ suffix[file.mimetype] )
+  }
+})
 
-//app.use(morgan)('dev');
-
-//const upload = multer({storage: storage}).single("profilePicture")
+const upload = multer({storage: storage}).single("profilePicture")
 
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -60,7 +77,7 @@ function requireLogin(req, res, next) {
 	}
 }
 app.post('/api/authenticate', userController.authenticate)
-app.post('/user', userController.create)
+app.post('/user', upload, userController.create)
 app.get('/test')
 app.put('/user', userController.update)
 app.post('/messages', requireLogin, messagesController.create)
