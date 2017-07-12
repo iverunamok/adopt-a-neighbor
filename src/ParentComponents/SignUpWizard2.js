@@ -10,6 +10,8 @@ export default class SignUpWizard2 extends Component {
 			username: "",
 			password: "",
 			address: "",
+			profilePic: "",
+			imagePreviewUrl: ""
 		};
 		console.log("Constructor did things")
 	}
@@ -68,6 +70,29 @@ export default class SignUpWizard2 extends Component {
 
 	}
 
+	onPictureChange(e){
+		console.log(e.ref);
+		// this function happens on every hcange opf input
+		// you need to find the ref to the file in the event
+		//  use the reference to the picture file to upload the file to the database
+		//  and set the state of this page, like this -> this.setState({})
+	}
+	_handleImageChange(e) {
+    e.preventDefault()
+    e.preventDefault();
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    reader.readAsDataURL(file)
+  }
+
 	keyPress(event){
 		if(event.key === 'Enter'){
 			this.submitLogin()
@@ -75,9 +100,9 @@ export default class SignUpWizard2 extends Component {
 	}
 
 	render(){
-		let { imagePreviewUrl } = this.state;
-		let $imagePreview = null;
-		if (imagePreviewUrl) {
+		const { imagePreviewUrl } = this.state;
+		const $imagePreview = null;
+			if (imagePreviewUrl) {
 			$imagePreview = (<img className="previewImage"src={imagePreviewUrl} />);
 		} else {
 			$imagePreview = (<div className="previewText"></div>);
@@ -87,6 +112,9 @@ export default class SignUpWizard2 extends Component {
 			<div>
 				<form ref="uploadForm" onSubmit={(e)=> e.preventDefault()} encType="multipart/form-data">
 				<div>
+					<div>
+            {$imagePreview}
+          </div>
 								<div>
 									Username: <input placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
 								</div>
@@ -98,7 +126,8 @@ export default class SignUpWizard2 extends Component {
 								</div>
 
 					<label>Upload a Profile Picture </label>
-					<input ref="file" type="file"  name="file"/><br/>
+					<input onChange={this.onPictureChange.bind(this)} ref="file" type="file"  name="file"/><br/>
+					<input className="file" ref="file" type="file" onChange={(e)=>{console.log('!'); this._handleImageChange(e)}} name="file"/><br/>
 					<div>
 						<button onClick={this.submitLogin.bind(this)}> Submit</button>
 					</div>

@@ -17,7 +17,6 @@ function create (req, res){
 		.end(function(err, geoRes){
 			const location = JSON.parse(geoRes.text).results[0].geometry.location;
 			const user = new User ({
-				//imgURL: (req.file ? req.file.path.split('public')[1] : ""),
 				profilePic: req.file.filename,
 				username: req.body.username,
 				password: req.body.password,
