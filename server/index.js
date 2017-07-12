@@ -13,6 +13,8 @@ const config = require('../src/config');
 const multer = require('multer');
 const path = require('path');
 
+
+
 const port = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/adoptaneighbor');
 app.set('superSecret', config.secret);
@@ -81,7 +83,7 @@ app.post('/user', upload, userController.create)
 app.get('/test')
 app.put('/user', userController.update)
 app.post('/messages', requireLogin, messagesController.create)
-app.get('/messages', requireLogin, messagesController.receive)
+app.get('/messages/:user2', requireLogin, messagesController.receive)
 app.get('/profile', requireLogin, (req,res) => res.json(req.user))
 app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)

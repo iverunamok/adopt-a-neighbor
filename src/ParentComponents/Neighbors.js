@@ -1,6 +1,7 @@
 import React, {Component} from 'react'; 
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-
+import {HELP_FIELDS, variable} from '../config'
+import Messages, {MessagePane} from './Messages'
 
 export default class Neighbors extends Component {
 	constructor(props){
@@ -8,63 +9,73 @@ export default class Neighbors extends Component {
     console.log(props)
     this.state = {
           userList: []
-    };
+    }
  }
   
-  fetchingUsers(){
+  fetchingNeighbors(){
     console.log("here????")
     if(this.props.token){
       fetch('/fieldMatch?token=' + this.props.token,
         { method: 'GET',
-          mode: 'no-cors',
         })
         .then(response => response.json())
-        .then(neighbors => this.setState({userList: neighbors}))
+        .then(neighbors => {
+          console.log('nay, boars!', neighbors)
+          this.setState({userList: neighbors})
+        })
     }
   }
 
   componentDidMount(){
-    this.fetchingUsers();
+    this.fetchingNeighbors();
   }
 
   render(){
-    return (
+    return(
       <div>
-        <ul>
-          {this.state.userList.map(user => (
-            <li>{user.username} </li>
-            ))}
-        </ul>
+        <div>
+          {this.state.userList.map(user => <Neighbor {...user} {...this.props} />)}
+        </div>
       </div>
     )
   }
 }
-           //need to turn these into seperate pieces, fully independent?\
-           //maybe I could do a map with multiple function parameters? ask nathan
-                          //*user Image
-                              // <ul>
-                              //     {this.state.userList.map(userIMG => (
-                              //       <li>{userIMG.imgURL}</li>
-                              //       ))}
-                              // </ul>
-                          //*user Fields? still needs work
-                              // <ul>
-                              //   {this.state.userList.map(variable => {
-                              //             const obj = {}
-                              //             obj[variable] = true;
-                              //             return obj
-                              //            })}
-                              // </ul>
-                          //*user Location? still need a map function to give only approx location... 
-                          //*do we want to pull out city or zipcode here? organize this by closest to farthest
-                              // <ul>
-                              //    {this.state.userList}.map(userLocation => (
-                              //      <li> {userLocation.address}))</li>
-                              // </ul>
-                          //*message each user button? still needs work? what would be easiest
-                              // <div>
-                              //    <Link to="/Messages">
-                              //        <button onClick={this.fetchingUsers.bind(this)}>Message</button>
-                              //    </Link>
-                              // </div>
+
+class Neighbor extends Component {
+  constructor(props){
+    super(props)
+    console.log(props)
+    this.state = {
+          showMessage: false
+    }
+    this.toggleMessage = this.toggleMessage.bind(this)
+ }
+
+  toggleMessage(){
+    this.setState({showMessage: !this.state.showMessage})
+  }
+
+  render(){
+    console.log(this.props)
+    const {username} = this.props
+    return (
+      <div>
+        <h1>{username}</h1>
+        { 
+          HELP_FIELDS
+            .filter(field => this.props[variable(field)])
+            .map((field) => {
+              return <div id={field}> {field} </div>
+          })
+        }
+            <button onClick={this.toggleMessage}>Message</button>
+        <div>
+          {this.state.showMessage ? <Messages {...this.props} toggleMessage={this.toggleMessage.bind(this)} /> : <span />}
+        </div>
+     </div>)
+  }
+}
+                 
+                              
+                          
      

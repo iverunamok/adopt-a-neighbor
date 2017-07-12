@@ -61,7 +61,7 @@ export default class App extends Component {
           <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>
           <Route path="/Home" component={() => <Home username={this.state.username} token={this.state.token}/>}/>
           <Route path="/Messages" component={() => <Messages token={this.state.token}/>}/>
-          <Route path="/Neighbors" component={() => <Neighbors token={this.state.token}/>}/>
+          <Route path="/Neighbors" component={() => <Neighbors token={this.state.token} User1={this.state.username}/>}/>
           <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
           <Route path="/SignUpWizard2" component={(props) => <SignUpWizard2 {...props} token={this.state.token} login={this.login.bind(this)}/>}/>
           <Route path="/SignUpWizardHelper" component={this.userInfo(SignUpWizardHelper)}/>
