@@ -4,7 +4,6 @@ const {HELP_FIELDS, variable} = require('../src/config')
 
 
 const schema = {
-	"imgURL": String,
 	"username": {type: String, required: true},
 	"password": {type: String, required: true},
 	"admin": {type: Boolean, default: false},
@@ -13,6 +12,7 @@ const schema = {
 	"helper": Boolean,
 	"lng": Number,
 	"lat": Number,
+	"profilePic": String,
 	location: {
 		type: {
 			type: String,
