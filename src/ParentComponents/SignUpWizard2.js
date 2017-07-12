@@ -7,10 +7,9 @@ export default class SignUpWizard2 extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			userName: "",
+			username: "",
 			password: "",
 			address: "",
-			profilePic: "",
 			imagePreviewUrl: ""
 		};
 		console.log("Constructor did things")
@@ -21,7 +20,7 @@ export default class SignUpWizard2 extends Component {
 
 	userName(event) {
 		//console.log("Set the username to ", this.state.userName)
-		this.setState({userName: event.target.value});
+		this.setState({username: event.target.value});
 	}
 
 	passWord(event) {
@@ -35,10 +34,13 @@ export default class SignUpWizard2 extends Component {
 	}
 
 	submitLogin(){
+		console.log('submitting login')
 		const fd = new FormData();
 		fd.append('profilePicture', ReactDom.findDOMNode(this.refs.file).files[0]); //appending the profile pic hi tom
 		for (var key in this.state){
-			fd.append(key, this.state[key]) //sending in form data hi tom
+			if (key !== 'imagePreviewUrl'){
+				fd.append(key, this.state[key]) //sending in form data hi tom
+			}
 		}
 		fetch('/user', {
   				method: 'POST',

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'; 
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {HELP_FIELDS, variable} from '../config'
 import Messages, {MessagePane} from './Messages'
@@ -11,7 +11,7 @@ export default class Neighbors extends Component {
           userList: []
     }
  }
-  
+
   fetchingNeighbors(){
     console.log("here????")
     if(this.props.token){
@@ -57,11 +57,12 @@ class Neighbor extends Component {
 
   render(){
     console.log(this.props)
-    const {username} = this.props
+    const {username, profilePic} = this.props
     return (
       <div>
         <h1>{username}</h1>
-        { 
+				{profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + profilePic} /> : ''}
+        {
           HELP_FIELDS
             .filter(field => this.props[variable(field)])
             .map((field) => {
@@ -75,7 +76,3 @@ class Neighbor extends Component {
      </div>)
   }
 }
-                 
-                              
-                          
-     

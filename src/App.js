@@ -19,6 +19,8 @@ export default class App extends Component {
   }
 
   userInfo = (Comp) => (props) => <Comp {...props} username={this.state.username} token={this.state.token} cookieLoaded={this.state.cookieLoaded}/>
+
+
 // Place Profile pic properties/etc. in here somehow.
 
   componentDidMount(){ //research componentDidMount
@@ -55,7 +57,7 @@ export default class App extends Component {
             </div>
             <button onClick={ ()=> window.history.back()}>Take me back</button>
             {this.state.token ? <Link to='/' onClick={this.logout.bind(this)}> Logout </Link> : ""}
-
+            {this.state.profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + this.state.profilePic} /> : ''}
           </div>
           <Route exact path="/" component={() => <Splash  token={this.state.token}/>}/>
           <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>

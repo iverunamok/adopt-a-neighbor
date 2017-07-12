@@ -75,7 +75,8 @@ function authenticate(req, res) {
 						message: 'Enjoy your hella trill token!',
 						token: token,
 						username: req.body.username,
-						address: user.address
+						address: user.address,
+						profilePic: user.profilePic
 						});
 					}
 				}
