@@ -10,14 +10,15 @@ const messagesController = require('../controllers/messages');
 const searchesController = require('../controllers/search');
 const jwt = require('jsonwebtoken');
 const config = require('../src/config');
-
+const path = require('path');
 
 
 
 const port = process.env.PORT || 3001;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/adoptaneighbor');
 app.set('superSecret', config.secret);
-app.use(express.static('public'))
+//app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, '..', 'build')))
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -71,5 +72,8 @@ app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)
 app.get('/fieldMatch', requireLogin, searchesController.fieldMatch)
 app.get('/sentMessages', requireLogin, messagesController.sentMessages)
+app.get('/*',  (req, res) => {
+   res.sendFile(path.join(__dirname, '..' ,'build', 'index.html'));
+})
 
 app.listen(port)

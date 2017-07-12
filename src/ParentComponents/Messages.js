@@ -40,7 +40,7 @@ export default class Messages extends Component {
     .then((response) => {
       this.setState({text: ''})
       this.props.toggleMessage()
-      //this.receiveMessage()
+      this.receiveMessage()
     })
   }
   receiveMessage(){
@@ -78,5 +78,16 @@ export default class Messages extends Component {
     )
   }
 }
+
+export class MessageHistory extends Component {
+  render(){
+  return(
+    <div>
+    {this.messArr.bind(this)}
+    </div>
+    )
+  }
+}
+
 
 
