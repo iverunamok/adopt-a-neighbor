@@ -71,7 +71,10 @@ app.get('/profile', requireLogin, (req,res) => res.json(req.user))
 app.get('/user', requireLogin, searchesController.receive)
 app.get('/findFriend/:username', searchesController.findFriend)
 app.get('/fieldMatch', requireLogin, searchesController.fieldMatch)
-app.get('/sentMessages', requireLogin, messagesController.sentMessages)
+app.get('/getAllSenderNames', requireLogin, messagesController.getAllSenderNames)
+// app.get('/sentMessages', requireLogin, messagesController.sentMessages)
+app.get('/getAllMessages', requireLogin, messagesController.getAllMessages)
+
 app.get('/*',  (req, res) => {
    res.sendFile(path.join(__dirname, '..' ,'build', 'index.html'));
 })
