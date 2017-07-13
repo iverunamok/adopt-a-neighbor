@@ -13,9 +13,9 @@ export default class SignUpWizard2 extends Component {
 			imagePreviewUrl: ""
 		};
 		console.log("Constructor did things")
-    this.userName = this.userName.bind(this)
-    this.passWord = this.passWord.bind(this)
-    this.userAddress = this.userAddress.bind(this)
+		this.userName = this.userName.bind(this)
+		this.passWord = this.passWord.bind(this)
+		this.userAddress = this.userAddress.bind(this)
 	}
 
 	userName(event) {
@@ -56,10 +56,12 @@ export default class SignUpWizard2 extends Component {
 		})
 
 	}
+
   
   
   
    _handleImageChange(e) {
+
     e.preventDefault()
 
     const reader = new FileReader();

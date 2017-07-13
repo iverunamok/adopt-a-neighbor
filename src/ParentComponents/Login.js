@@ -1,4 +1,4 @@
-import React, {Component} from 'react'; 
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
@@ -26,11 +26,11 @@ export default class Login extends Component {
 		})
 		.then(resp => resp.json())
 		.then(json =>{
-			 const {token, username} = json
-			 this.props.login({token, username})
+			 const {token, username, profilePic} = json
+			 this.props.login({token, username, profilePic})
 			 this.context.router.history.push('/Home')
 		})
-	
+
 	}
 	keyPress(event){
 		if(event.key === 'Event'){
@@ -69,7 +69,3 @@ export default class Login extends Component {
 Login.contextTypes = {
   router: React.PropTypes.object
 }
-
-
-
-

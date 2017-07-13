@@ -1,16 +1,17 @@
-import React, {Component} from 'react'; 
+import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 
-export default class Home extends Component {
-
-		
+export default class Home extends Component {	
+  
+  
 	render(){
-		return(<div>
+		  return(<div>
 				<div className="appheader">
 					<div className="rightfont">
 			        	<h2>
 			          	Welcome back {this.props.username}!
+                  {this.props.profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + this.props.profilePic} /> : ''}
 			        	</h2>
 			    </div>
 			    <div className="rightfont">
@@ -37,4 +38,3 @@ export default class Home extends Component {
 	}
 
 }
-

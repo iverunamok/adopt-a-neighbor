@@ -49,7 +49,7 @@ var storage = multer.diskStorage({
   }
 })
 
-const upload = multer({storage: storage}).single("profilePicture")
+var upload = multer({storage: storage}).single("profilePicture")
 
 
 app.use(express.static(path.join(__dirname, '..', 'public')))
@@ -81,7 +81,6 @@ function requireLogin(req, res, next) {
 }
 app.post('/api/authenticate', userController.authenticate)
 app.post('/user', upload, userController.create)
-app.get('/test')
 app.put('/user', userController.update)
 app.post('/messages', requireLogin, messagesController.create)
 app.get('/messages/:user2', requireLogin, messagesController.receive)

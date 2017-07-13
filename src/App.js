@@ -38,6 +38,8 @@ class AppRoutes extends Component {
   }
 
   userInfo = (Comp) => (props) => <Comp {...props} username={this.state.username} token={this.state.token} cookieLoaded={this.state.cookieLoaded}/>
+
+
 // Place Profile pic properties/etc. in here somehow.
 
   componentDidMount(){ //research componentDidMount
@@ -61,21 +63,24 @@ class AppRoutes extends Component {
   }
   render(){
     const {pathname} = this.context.router.history.location
-    return(<div>
-
-          <div className="App">
+    return(
+         <div>
+           <div className="App">
             <div className="App-header">
-            <h2></h2>
-
+           
+            <h2>Adopt A Neighbor</h2>
+         
             {pathname !== '/' ? <button className="button" onClick={ ()=> window.history.back()}>Take me back</button> : ''}
             {this.state.token ? <Link to='/' onClick={this.logout.bind(this)}> Logout </Link> : ""}
+            {this.state.profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + this.state.profilePic} /> : ''}
+          
             </div>
             <div>
             </div>
-          </div>
+          </div>   
           <Route exact path="/" component={() => <Splash  token={this.state.token}/>}/>
           <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>
-          <Route path="/Home" component={() => <Home username={this.state.username} token={this.state.token}/>}/>
+          <Route path="/Home" component={() => <Home profilePic={this.state.profilePic} username={this.state.username} token={this.state.token}/>}/>
           <Route path="/Messages" component={() => <Messages token={this.state.token} username={this.state.username}/>}/>
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token} User1={this.state.username}/>}/>
           <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
