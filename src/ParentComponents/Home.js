@@ -11,7 +11,6 @@ export default class Home extends Component {
 					<div className="rightfont">
 			        	<h2>
 			          	Welcome back {this.props.username}!
-                  {this.props.profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + this.props.profilePic} /> : ''}
 			        	</h2>
 			    </div>
 			    <div className="rightfont">
