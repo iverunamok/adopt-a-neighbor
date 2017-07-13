@@ -8,7 +8,8 @@ export default class Neighbors extends Component {
     super(props)
     console.log(props)
     this.state = {
-          userList: []
+          userList: [],
+          text: ""
     }
  }
   
@@ -51,12 +52,35 @@ class Neighbor extends Component {
     this.toggleMessage = this.toggleMessage.bind(this)
  }
 
+   submitMessage(){
+    fetch('/messages?token=' + this.props.token, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: this.props.user1, 
+        to: this.props.username, 
+        text: this.state.text,
+        token: this.props.token,
+        date: this.props.date
+      })
+    })
+    .then((response) => {
+      this.setState({text: ''})
+      this.toggleMessage()
+    })
+  }
+
+  textSet(event) {
+    this.setState({text: event.target.value});
+  }
+
   toggleMessage(){
     this.setState({showMessage: !this.state.showMessage})
   }
 
   render(){
-    console.log(this.props)
     const {username} = this.props
     return (
       <div>
@@ -70,12 +94,17 @@ class Neighbor extends Component {
         }
             <button onClick={this.toggleMessage}>Message</button>
         <div>
-          {this.state.showMessage ? <Messages {...this.props} toggleMessage={this.toggleMessage.bind(this)} /> : <span />}
+          {this.state.showMessage ? 
+            (<span><br/>
+            <textArea value={this.state.text} placeholder="Enter Message to your neighbor!" onChange={this.textSet.bind(this)}>
+            </textArea>
+            <br/>
+            <button className="button"  onClick={this.submitMessage.bind(this)}>Submit</button>
+            <br/> 
+            <br/>
+            </span>
+            ) : ''}
         </div>
      </div>)
   }
 }
-                 
-                              
-                          
-     

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'; 
 import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom';
 
-
 export default class Messages extends Component {
   constructor(props){
   super(props)
@@ -9,14 +8,18 @@ export default class Messages extends Component {
     text: "",
     messages : [],
     messArr: [],
-    redirect: false
+    userList: [],
+    redirect: false,
+    showingUser: ''
   };
+
+  this.allMessages = this.allMessages.bind(this)
   }
 
-  // componentDidMount(){
-  //   setInterval(this.recieveMessage.bind(this), 3000)
+  componentWillReceiveProps(){
+    console.log('receiving props')
 
-  // }
+  }
 
   textSet(event) {
     this.setState({text: event.target.value});
@@ -31,7 +34,7 @@ export default class Messages extends Component {
       },
       body: JSON.stringify({
         from: this.props.user1, 
-        to: this.props.username, 
+        to: this.state.showingUser, 
         text: this.state.text,
         token: this.props.token,
         date: this.props.date
@@ -39,44 +42,76 @@ export default class Messages extends Component {
     })
     .then((response) => {
       this.setState({text: ''})
-      this.props.toggleMessage()
-      //this.receiveMessage()
     })
   }
-  receiveMessage(){
-    var {username} = this.props
-    fetch('/messages/:' + username + '/?token='+ this.props.token, {
+
+  allLoggedInUserMessages(){
+    fetch('/messages' + '?token=' + this.props.token, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => {
-      this.setState({messages : response || []})
+    .then(response => response.json())
+    .then(allMessageArray => {
+      console.log("Hi MITCH", allMessageArray)
     })
   }
 
-  sentMessages(){
-      fetch('/sentMessages?token=' + this.props.token,
-        { method: 'GET',
+  allMessages(user){
+    return () => {
+      if(this.state.showingUser === user){
+        this.setState({showingUser: false})
+      } else{
+        this.setState({showingUser: user})
+        console.log('going to get the messages', this.props.token)
+        fetch('/messages/' + user + '?token='+ this.props.token, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         })
         .then(response => response.json())
-        .then(neighbors => {
-          this.setState({messArr: []})
+        .then(messageHistoryArr => {
+          console.log('MHA ', messageHistoryArr)
+          this.setState({messArr : messageHistoryArr.messages || []})
         })
-    }
-  
+      }
+    
+   }
+  }
+
   render(){
+    const {username, User1} = this.props
+    if (this.props.token && this.state.userList.length === 0){
+      fetch('/getAllSenderNames?token=' + this.props.token)
+      .then(res => res.json())
+      .then(json => this.setState({userList: json}))
+    }
     if(this.state.redirect) return <Redirect to="/Home" />
-    return(
+     return(
+
     	<div>
-          <div>
+          {this.state.userList.map(user => {
+           return (<div>
+             Show messages from {user} <button onClick={this.allMessages(user).bind(this)}>See Messages</button>
+           </div>) 
+
+          })}
             <br/><textArea value={this.state.text} placeholder="Enter Message to your neighbor!" onChange={this.textSet.bind(this)}></textArea><br/>
-            <button className="button" onClick={this.submitMessage.bind(this)}>Submit</button><br/> <br/>
+            <button className="button" onClick={this.submitMessage.bind(this)}>Reply</button><br/> <br/>
+          <div>
+            {this.state.showingUser ? this.state.messArr.map((user) =>{
+                return(
+                  <div>
+                    <h3>{user.to}</h3>
+                    <span>{user.date.slice(0,10)}</span>
+                    <p>{user.text}</p>
+                  </div>
+                )
+            }) : ''}
           </div>
       </div>
     )
   }
 }
-
-
