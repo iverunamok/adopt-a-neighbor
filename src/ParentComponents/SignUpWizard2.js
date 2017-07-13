@@ -86,7 +86,7 @@ export default class SignUpWizard2 extends Component {
 		const { imagePreviewUrl } = this.state;
 		var $imagePreview = null;
 			if (imagePreviewUrl) {
-			$imagePreview = (<img style={(height: 100, width:100}} className="previewImage" src={imagePreviewUrl} />);
+			$imagePreview = (<img style={{height: 100, width:100}} className="previewImage" src={imagePreviewUrl} />);
 		} else {
 			$imagePreview = (<div className="previewText"></div>);
 		}
