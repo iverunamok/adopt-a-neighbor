@@ -68,7 +68,6 @@ class AppRoutes extends Component {
            <div className="App">
             <div className="App-header">
            
-            <h2>Adopt A Neighbor</h2>
          
             {pathname !== '/' ? <button className="button" onClick={ ()=> window.history.back()}>Take me back</button> : ''}
             {this.state.token ? <Link to='/' onClick={this.logout.bind(this)}> Logout </Link> : ""}

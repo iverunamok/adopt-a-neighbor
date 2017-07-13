@@ -85,7 +85,14 @@ class Neighbor extends Component {
     const {username, profilePic} = this.props
     return (
       <div>
-        <h1>{username}</h1>
+      <div className="fluid-container">
+      <div className="rightfont">
+      <div className="appheader">
+      <div className="col-md-12">
+      <h2 className="text-primary text-center" className="rightfont" className="textBlack">Neighbors</h2>
+      </div>
+      </div>
+        <h2>{username}</h2>
 				{profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + profilePic} /> : ''}
         {
           HELP_FIELDS
@@ -107,6 +114,8 @@ class Neighbor extends Component {
             </span>
             ) : ''}
         </div>
+        </div>
+     </div>
      </div>)
   }
 }

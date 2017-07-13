@@ -92,30 +92,38 @@ export default class SignUpWizard2 extends Component {
 		}
 		if (this.props.token) return <Redirect to='/HelperChooser'/>
 		return(
-        <div>
-          <form ref="uploadForm" onSubmit={(e)=> e.preventDefault()} encType="multipart/form-data">
-          <div>
-          <div>
-            {$imagePreview}
-          </div>
-                <div>
-                  Username: <input placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
-                </div>
-                <div>
-                  Password: <input type="password" placeholder="Enter password" onChange={this.passWord.bind(this)}/>
-                </div>
-                <div>
-                  Address: <input type="address"  placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
-                </div>
-
-          <label>Upload a Profile Picture </label>
-          <input onChange={this._handleImageChange.bind(this)} ref="file" type="file"  name="file"/><br/>
-
-          <div>
-            <button onClick={this.submitLogin.bind(this)}> Submit</button>
-          </div>
-         </div>
-       </form>
+        <div className="fluid-container">
+        	<div className="rightfont">
+		        <div className="appheader">
+		        <h2 className="form-sigin-heading">Join Your Community</h2>
+		        </div>
+			      <form className="form-horizontal" ref="uploadForm" onSubmit={(e)=> e.preventDefault()} encType="multipart/form-data">
+				       <div>
+				          <div>
+				            {$imagePreview}
+				          </div>
+			          		<div>
+			                	<label for="inputUsername" className="sr-only">
+			                  		Username: </label><input type="username" id="inputUsername" className="form-control" placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
+			                </div>
+			                <div>
+			                	<label for="inputPassword" className="sr-only">
+			                  		Password:</label><input type="password" id="inputPassword" className="form-control" placeholder="Enter password" onChange={this.passWord.bind(this)}/>
+			                </div>
+			                <div>
+			                	<label for="inputAddress" className="sr-only">
+			                  		Address:</label><input type="address" id="inputAddress" className="form-control" placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
+			                </div>
+			                <div>
+			          			<label>Upload a Profile Picture </label>
+			          			<input onChange={this._handleImageChange.bind(this)} ref="file" type="file"  name="file"/><br/>
+			          		</div>
+					          <div>
+					            <button className="btn btn-block" type="button" onClick={this.submitLogin.bind(this)}> Submit</button>
+					     	</div>
+					   </div>
+		         </form>
+      </div>
       </div>
     )	
 	}

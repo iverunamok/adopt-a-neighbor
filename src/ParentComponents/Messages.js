@@ -92,14 +92,21 @@ export default class Messages extends Component {
      return(
 
     	<div>
+        <div className="fluid-container">
+        <div className="rightfont">
+        <div className="appheader">
+        <div className="col-md-12">
+        <h2 className="text-primary text-center" className="rightfont" className="textBlack">Messages</h2>
+        </div>
+        </div>
           {this.state.userList.map(user => {
-           return (<div>
+           return (<div className="textlarger">
              Show messages from {user} <button onClick={this.allMessages(user).bind(this)}>See Messages</button>
            </div>) 
 
           })}
             <br/><textArea value={this.state.text} placeholder="Enter Message to your neighbor!" onChange={this.textSet.bind(this)}></textArea><br/>
-            <button className="button" onClick={this.submitMessage.bind(this)}>Reply</button><br/> <br/>
+            <button className="button btn btn-block" onClick={this.submitMessage.bind(this)}>Reply</button><br/>
           <div>
             {this.state.showingUser ? this.state.messArr.map((user) =>{
                 return(
@@ -110,6 +117,8 @@ export default class Messages extends Component {
                   </div>
                 )
             }) : ''}
+          </div>
+          </div>
           </div>
       </div>
     )

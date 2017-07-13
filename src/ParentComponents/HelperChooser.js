@@ -29,7 +29,7 @@ export default class HelperChooser extends Component {
 					<div className="rightfont">
 						<div className="appheader">
 								<div className= "col-md-12">
-									<h2 className="text-primary text-center">Join the Community</h2>
+									<h2 fontColor="black" className="textBlack">Join the Community</h2>
 								</div>
 						</div>
 					<h2 className="text-primary text-center">Are you a here to help neighbors?</h2>
