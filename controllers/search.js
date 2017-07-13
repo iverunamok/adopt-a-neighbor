@@ -74,8 +74,8 @@ function fieldMatch(req, res) {
 			User.find({
 					helper: !user.helper,
 					$or : helpFields
-				}, {password: false}, (err, users) => {
-				//.sort({distance: "ascending"})
+				}, {password: false, date: false}, (err, users) => {
+				// .sort({distance: "ascending"})
 				res.json(users)
 			})
 
