@@ -1,94 +1,42 @@
-
-
-body {
-  font-family: 'Vast Shadow', cursive;
-  font-weight: normal;
-  font-style: normal;
-  background-image: url("/images/Myles_Randy1.jpg")
+.myleshelping {
+  border: none;
+  background-color: rgb(0,0,0);
+  text-align: center;
+  height:200px;
+  width:100%;
+  border-width:10px;
+  border-color: black;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 20% 20%;
 }
 
-
-.App {
-  text-align: left;
+.appheader {
+  width: 100%;
+  height: 100px;
+  background-color: #4E8DA6;
+  padding-top: 15px;
 }
 
-p {
-  font-size: 1.5em;
-  color: red;
-  background-color: transparent;
+.rightfont {
+  font-family: 'Crimson Text', serif;
+  text-align: center;
+  color: black;
+}
+.blurb {
+  background-color: silver;
+  color: black;
 }
 
-div {
-  
+.button {
+  background-color: #F2B33D; /* Green */
+    border: thick;
+    outline-width: 2px;
+    outline-color: black;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }
-
-
-/*.UserProfile ul {
-  box-sizing: border-box;
-  justify-content: space-between;
-}
-
-/*Login page styling*/
-
-/*.header2{
-  font-size: 25px;
-  margin-top: -25px;
-}
-.LoginPageContainer {
-  margin-top: -115px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
-  background: white;
-  height: 60vh;
-}
-
-.LoginHeader {
-  display: inline-flex;
-  font-family: 'Gloria Hallelujah', cursive;
-  font-size: 30px;
-  margin-bottom: auto;
-  justify-content: column;
-  flex-direction: column;
-}
-
-}*/
-
-/*.LoginForm > * {
-  align-items: top;
-  width: auto;
-  border: 1;
-  line-height: .5;
-  background: white;
-  font-size: 15px;
-  border-radius: 5px;
-}
-.LoginButton{
-  display: inline-flex;
-  flex-direction: column;
-  width: 10em;
-  margin: 1px;
-  margin-top: -55px;
-  margin-bottom: 10em;
-  padding-bottom: 5px;
-  background: white;
-  justify-content: column;
-  position: relative;
-  top: -5.5em;
-}
-input[type="textbox"] {
-  padding: .4em;
-  align-items: left;
-  flex-basis:500px;
-  margin: 10px;
-}
-
-input[type="password"] {
-  padding: .4em;
-  text-align: left;
-  flex-basis:500px;
-  margin: 10px;
-}*/
-
-

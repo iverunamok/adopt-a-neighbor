@@ -31,14 +31,19 @@ export default class SignUpWizardHelper extends Component {
 	render(){
 		const { toggle } = this
 		return(
-			<div>
-				<p>Thank you for gifting your skillzzzzz to the community!! Let us know WHAT YA GOT by checking all that apply! </p>
+			<div className="fluid-container">
+			<div className="rightfont">
+			<div className="appheader">
+				<h2>Thank you for gifting your skills to your community!</h2> 
+				<p>Let us know WHAT YA GOT by checking all that apply! </p>
 				{
 					HELP_FIELDS.map(field => (
 						<div>
+						<div class="btn-group" data-toggle="buttons">
         					<input
         						name="visit" type="checkbox" checked={this.state[variable(field)]} onChange={toggle(variable(field))} />
         					<label> {field} </label>
+        				</div>
         				</div>
 						))
 				}
@@ -46,6 +51,8 @@ export default class SignUpWizardHelper extends Component {
         		<div>
 					<Link to="/Home"><button onClick={this.clickButton.bind(this)}>Submit</button></Link>
     			</div>
+    		</div>
+    		</div>
     		</div>	
         )
 	}

@@ -4,26 +4,37 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 export default class Home extends Component {
 
-
-
 		
 	render(){
 		return(<div>
-				<div>
-			        <ul>
-			          Hello {this.props.username}
-			        </ul>
+				<div className="appheader">
+					<div className="rightfont">
+			        	<h2>
+			          	Welcome back {this.props.username}!
+			        	</h2>
 			    </div>
-				<div> 
-					<h1>Find neighbors near you:</h1>
+			    <div className="rightfont">
+			    	<div className="row">
+						<div className="col-md-12"> 
+							<h2 className="text-primary text-center">Find neighbors near you:</h2>
+						</div>
+						<div className="col-md-12">
+							<Link to="/Neighbors"><button className="btn btn-block" type="button">Neighbors</button></Link>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-md-12">
+							<h2 className="text-primary text-center">Check your messages here:</h2>
+						</div>
+						<div className="col-md-12">
+							<Link to="/Messages"><button className="btn btn-block" type="button">Messages</button></Link>
+						</div>
+					</div>
+					</div>
 				</div>
-				<form action="">
-					<Link to="/Neighbors"><button className="button">Neighbors</button></Link>
-					<div>Check your messages here:</div>
-					<Link to="/Messages"><button className="button">Messages</button></Link>
-				</form>
 				</div>
 			)
 	}
 
 }
+
