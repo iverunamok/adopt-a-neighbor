@@ -15,7 +15,7 @@ export default class HelperChooser extends Component {
     				username: this.props.username,
     				helper: helper,
   				})
-		})
+  			})
 
 	}
 
@@ -25,12 +25,17 @@ export default class HelperChooser extends Component {
 			console.log('No token :(')
 			this.props.history.push('/Login')
 		}
-		return(<div>
-				<div>Are you a here to help neighbors?</div>
-					<div>
-						<Link to="/SignUpWizardHelper"><button onClick={this.clickButton(true)}>Helper</button></Link>
-				<div>Are you here to receive support from neighbors?</div>
-						<Link to="/SignUpWizardReceiver"><button onClick={this.clickButton(false)}>Receiver</button></Link><br />
+		return(<div className="fluid-container">
+					<div className="rightfont">
+						<div className="appheader">
+								<div className= "col-md-12">
+									<h2 className="text-primary text-center">Join the Community</h2>
+								</div>
+						</div>
+					<h2 className="text-primary text-center">Are you a here to help neighbors?</h2>
+						<Link to="/SignUpWizardHelper"><button className="btn btn-block" onClick={this.clickButton(true)}>Helper</button></Link>
+					<h2 className="text-primary text-center">Are you here to receive support from neighbors?</h2>
+						<Link to="/SignUpWizardReceiver"><button className="btn btn-block" onClick={this.clickButton(false)}>Receiver</button></Link>
 					</div>
 				</div>)
 	}

@@ -54,18 +54,27 @@ export default class SignUpWizard2 extends Component {
 	render(){
 		if (this.props.token) return <Redirect to='/HelperChooser'/>
 		return(
-
-			<div>
+			<div className="fluid-container">
+			<div className="rightfont">
+			<div className="appheader">
+				<h2 className="form-signin-heading">Join Your Community</h2>
+			</div>
+			</div>
+				<form className="form-horizontal">
 					<div>
-						Username: <input placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
+					<label for="inputUsername" className="sr-only">
+						Create Username: </label><input type="username" id="inputUsername" className="form-control" placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
 					</div>
 					<div>
-						Password: <input type="password" placeholder="Enter password" onChange={this.passWord.bind(this)}/>
+					<label for="inputPassword" className="sr-only">
+						Create Password: </label><input type="password" id="inputPassword" className="form-control" placeholder="Enter a password" onChange={this.passWord.bind(this)}/>
 					</div>
 					<div>
-						Address: <input type="address"  placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
+					<label for="inputAddress" className="sr-only">
+						Enter Your Address: </label><input type="address" id="inputAddress" className="form-control" placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
 					</div>
-					<button onClick={this.submitLogin.bind(this)}> Submit</button>
+					<button className="btn btn-block" type="button" onClick={this.submitLogin.bind(this)}>Submit</button>
+				</form>
 			</div>
 		)
 	}
