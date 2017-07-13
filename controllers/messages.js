@@ -19,8 +19,9 @@ const mongoose = require('mongoose');
 		})
 	}
 	function receive (req, res){ //gets all messages from users
-		const user2 = req.query.user2//user2 is the other person
+		const user2 = req.params.user2//user2 is the other person
 		const user1 = req.user.username//this is the person logged-in
+		console.log(user2, user1)
 		const u2toU1 = {
 			from: user2,//from them to us
 			to: user1
@@ -38,7 +39,7 @@ const mongoose = require('mongoose');
 				console.log('updating', messages)
 				Message.update({from: user2, to: user1}, {$set: {received: true}}, {multi: true}, function(err, update){ 
 				// making sure the received messages are marked true upon getting to Messages page
-					res.json(messages)
+					res.json({messages: messages})
 				}) 
 				// tests for a match in the string (res.json)
 				// console.log(res, res)
@@ -47,27 +48,34 @@ const mongoose = require('mongoose');
 			//it gets all the messages between you guys and sorts the by date, marks them as received(or seen),
 			//so when it checks later to see if there are unread messages, it updates it.
 	}
-	// function messageFriend(req, res){
-	// 	User.findOne({
-	// 		username: req.params.username
-	// 	}, 
-	// 	function(err, result) {
-	// 		console.log(err. result)
-	// 		res.json(result.username)
-	// 	})
-	// }
-	function sentMessages(req, res){ //finds messages to the username that are not recieved,
-									 //sent to you not marked as recieved
+
+	function getAllMessages(req, res){ 
 		Message.find({
-			to: req.user.username,
-			received: false
-		})
-			.sort({date: "descending"})
-			.exec((err, messages) => {console.log(messages, err); res.json(messages)})
-}
+			to: req.user.username,	
+		},(err, user) => {
+			if (err) {
+				throw err;
+			}})
+			.exec((err, messages) => {
+				res.json({messages})
+
+			})
+	}
+
+	function getAllSenderNames(req, res){ 
+		console.log(req.user)
+		Message.find({
+			to: req.user.username,	
+		}).distinct('from', function (err, user) {
+			if (err) {throw err}
+			res.send(user)})
+	}
+
 module.exports = {
 	create : create,
 	receive: receive,
 	// messageFriend: messageFriend,
-	sentMessages: sentMessages
+	// sentMessages: sentMessages,
+	getAllMessages: getAllMessages,
+	getAllSenderNames: getAllSenderNames
 }

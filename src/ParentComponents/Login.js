@@ -39,17 +39,30 @@ export default class Login extends Component {
 	}
 	render(){
 		const {username, password} = this.state
-		return <div>
+		return( 
+			<div className="fluid-container">
+			<div className="rightfont">
+			<div className="appheader">
+					<div class="col-md-12">
+						<h2 class="text-primary text-center">Re-Join Your Community</h2>
+					</div>
+			</div>
+			</div>
+			<form className="form-horizontal">
 				<div>
-					Username: <input value={username} placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
+				<label for="inputUsername" className="sr-only">
+					Username: </label><input type="username" id="inputUsername" className="form-control" value={username} placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
 				</div>
 				<div>
-					Password: <input type="password" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
+				<label for="inputPassword" className="sr-only">
+					Password: </label><input type="password" id="inputPassword" className="form-control" value={password} placeholder="Enter password" onChange={this.passWord.bind(this)} onKeyPress={this.keyPress.bind(this)}/>
 				</div>
 				<div>
-					<button onClick={this.submitLogin.bind(this)}> Login</button>
+					<button className="btn btn-block" type="button" onClick={this.submitLogin.bind(this)}>Login</button>
 				</div>
-			 </div>
+			</form>
+			</div>
+		)	 
 	}
 }
 

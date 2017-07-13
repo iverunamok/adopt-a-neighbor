@@ -24,24 +24,24 @@ export default class SignUpWizard2 extends Component {
 	}
 
 	passWord(event) {
-		//console.log("Password ", this.state.password)
+    //console.log("Password ", this.state.password)
 		this.setState({password: event.target.value});
 	}
 
 	userAddress(event) {
-		//console.log("address ", this.state.address )
-		this.setState({address: event.target.value})
+    //console.log("address ", this.state.address )
+		this.setState({address: event.target.value});
 	}
 
-	submitLogin(){
-		console.log('submitting login')
+  submitLogin(){
+    console.log('submitting login')
 		const fd = new FormData();
 		fd.append('profilePicture', ReactDom.findDOMNode(this.refs.file).files[0]); //appending the profile pic hi tom
 		for (var key in this.state){
-			if (key !== 'imagePreviewUrl'){
-				fd.append(key, this.state[key]) //sending in form data hi tom
-			}
-		}
+      if (key !== 'imagePreviewUrl'){
+			fd.append(key, this.state[key]) //sending in form data hi tom
+		  }
+    }
 		fetch('/user', {
   				method: 'POST',
   				body: fd
@@ -57,9 +57,11 @@ export default class SignUpWizard2 extends Component {
 
 	}
 
+  
+  
+  
+   _handleImageChange(e) {
 
-
-	_handleImageChange(e) {
     e.preventDefault()
 
     const reader = new FileReader();
@@ -74,7 +76,7 @@ export default class SignUpWizard2 extends Component {
     reader.readAsDataURL(file)
   }
 
-	keyPress(event){
+  keyPress(event){
 		if(event.key === 'Enter'){
 			this.submitLogin()
 		}
@@ -82,40 +84,40 @@ export default class SignUpWizard2 extends Component {
 
 	render(){
 		const { imagePreviewUrl } = this.state;
-	  var $imagePreview = null;
+		var $imagePreview = null;
 			if (imagePreviewUrl) {
-			$imagePreview = (<img style={{height: 100, width:100}} className="previewImage" src={imagePreviewUrl} />);
+			$imagePreview = (<img style={(height: 100, width:100}} className="previewImage" src={imagePreviewUrl} />);
 		} else {
 			$imagePreview = (<div className="previewText"></div>);
 		}
 		if (this.props.token) return <Redirect to='/HelperChooser'/>
 		return(
-			<div>
-				<form ref="uploadForm" onSubmit={(e)=> e.preventDefault()} encType="multipart/form-data">
-				<div>
-					<div>
+        <div>
+          <form ref="uploadForm" onSubmit={(e)=> e.preventDefault()} encType="multipart/form-data">
+          <div>
+          <div>
             {$imagePreview}
           </div>
-								<div>
-									Username: <input placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
-								</div>
-								<div>
-									Password: <input type="password" placeholder="Enter password" onChange={this.passWord.bind(this)}/>
-								</div>
-								<div>
-									Address: <input type="address"  placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
-								</div>
+                <div>
+                  Username: <input placeholder="Type in your username here" onChange={this.userName.bind(this)}/>
+                </div>
+                <div>
+                  Password: <input type="password" placeholder="Enter password" onChange={this.passWord.bind(this)}/>
+                </div>
+                <div>
+                  Address: <input type="address"  placeholder="Enter Your Address" onChange={this.userAddress.bind(this)}/>
+                </div>
 
-					<label>Upload a Profile Picture </label>
-					<input onChange={this._handleImageChange.bind(this)} ref="file" type="file"  name="file"/><br/>
+          <label>Upload a Profile Picture </label>
+          <input onChange={this._handleImageChange.bind(this)} ref="file" type="file"  name="file"/><br/>
 
-					<div>
-						<button onClick={this.submitLogin.bind(this)}> Submit</button>
-					</div>
-				</div>
-			</form>
-			</div>
-		)
+          <div>
+            <button onClick={this.submitLogin.bind(this)}> Submit</button>
+          </div>
+         </div>
+       </form>
+      </div>
+    )	
 	}
 }
 

@@ -14,6 +14,25 @@ import css from './App.css'
 
 
 export default class App extends Component {
+
+
+
+
+  render(){
+    console.log(this.context)
+    return (
+      <div>
+      <Router>    
+        <AppRoutes/>
+      </Router>
+      </div>
+    )
+  }
+
+
+}
+
+class AppRoutes extends Component {
   state = {
     token : ''
   }
@@ -42,41 +61,37 @@ export default class App extends Component {
     this.setState({token: '', cookieLoaded: false, address: '', username: ''}) // resets all your data to nothing, becuase that's what you are when you leave our site.
     // =browserHistory.push('/Login')// sends you back to the login page;
   }
-
-
-
   render(){
-    console.log(this.context)
-    return (
-      <div>
-      <Router>
-        <div>
-          <div className="App">
+    const {pathname} = this.context.router.history.location
+    return(
+         <div>
+           <div className="App">
             <div className="App-header">
+           
             <h2>Adopt A Neighbor</h2>
-            </div>
-            <button onClick={ ()=> window.history.back()}>Take me back</button>
+         
+            {pathname !== '/' ? <button className="button" onClick={ ()=> window.history.back()}>Take me back</button> : ''}
             {this.state.token ? <Link to='/' onClick={this.logout.bind(this)}> Logout </Link> : ""}
             {this.state.profilePic ? <img style={{height: 150, width:150}}src={'/profilePictures/' + this.state.profilePic} /> : ''}
-          </div>
+          
+            </div>
+            <div>
+            </div>
+          </div>   
           <Route exact path="/" component={() => <Splash  token={this.state.token}/>}/>
           <Route path="/Login" component={() => <Login login={this.login.bind(this)}/>}/>
           <Route path="/Home" component={() => <Home profilePic={this.state.profilePic} username={this.state.username} token={this.state.token}/>}/>
-          <Route path="/Messages" component={() => <Messages token={this.state.token}/>}/>
+          <Route path="/Messages" component={() => <Messages token={this.state.token} username={this.state.username}/>}/>
           <Route path="/Neighbors" component={() => <Neighbors token={this.state.token} User1={this.state.username}/>}/>
           <Route path="/HelperChooser" component={this.userInfo(HelperChooser)}/>
           <Route path="/SignUpWizard2" component={(props) => <SignUpWizard2 {...props} token={this.state.token} login={this.login.bind(this)}/>}/>
           <Route path="/SignUpWizardHelper" component={this.userInfo(SignUpWizardHelper)}/>
-          <Route path="/SignUpWizardReceiver" component={SignUpWizardReceiver}/>
-        </div>
-      </Router>
-      </div>
-    )
+          <Route path="/SignUpWizardReceiver" component={SignUpWizardReceiver}/> 
+        </div> )
+
   }
-
-
 }
 
-App.contextTypes = {
+AppRoutes.contextTypes = {
   router: React.PropTypes.object
 }
